@@ -10,6 +10,7 @@ const configuration = new Configuration({
 })
 
 
+
 const openAI = new OpenAIApi(configuration)
 
 
@@ -29,7 +30,7 @@ app.post('/', async (req, res) => {
         const prompt = req.body.prompt;
 
         const response = await openAI.createCompletion({
-            model: 'text-davinci-003',
+            model: "text-davinci-003",
             prompt: `${prompt}`,
             temperature: 0,
             max_tokens: 3000,
@@ -38,8 +39,8 @@ app.post('/', async (req, res) => {
             presence_penalty: 0,
         })
 
-        res.status(200).json({
-            bot: response.data.choices[0].text,
+        return res.status(200).json({
+            bot: response.data.choices[0].text
         })
 
     } catch (error) {
@@ -51,5 +52,5 @@ app.post('/', async (req, res) => {
 
 
 app.listen(PORT, () => {
-    console.log(`Server Running on port: ${PORT}`)
+    console.log(`AI server started on port: ${PORT}`)
 })
